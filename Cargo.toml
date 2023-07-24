@@ -1,0 +1,24 @@
+[package]
+name = "exchange-simulator"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+serde = { version = "1.0", features = ["derive"]}
+serde_json = "1.0"
+tungstenite = { version="0.14.0", features = ["rustls-tls", "native-tls"]}
+url = "2.2.2"
+ordered-float = "2.0"
+derivative = "2.2.0"
+clearscreen = "1.0.9"
+chrono = "0.4.19"
+tonic = "0.7.1"
+tokio = { version = "1.18.0", features = ["macros", "rt-multi-thread"] }
+orderbook = "0.1.0"
+prost = "0.10.1"
+futures = "0.3"
+tokio-tungstenite = "0.19.0"
+
+[build-dependencies]
+tonic-build = "0.7.2"
