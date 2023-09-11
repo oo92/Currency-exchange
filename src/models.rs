@@ -43,11 +43,7 @@ pub enum Data {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct Msg {
-    pub channel: String,
-    pub event: String,
-    pub data: Data,
-}
+pub struct Msg { pub channel: String, pub event: String, pub data: Data}
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Trade {
@@ -61,8 +57,7 @@ pub struct Trade {
     pub sell_order_id: u64,
     pub timestamp: String,
     #[serde(rename = "type")]
-    pub _type: u8,
-}
+    pub _type: u8}
 
 #[derive(Derivative, Serialize, Deserialize, Clone)]
 #[derivative(PartialEq, Eq, PartialOrd, Ord, Debug)]
@@ -137,11 +132,7 @@ pub struct OfferData {
 }
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct DepthStreamData {
-    pub last_update_id: usize,
-    pub bids: Vec<OfferData>,
-    pub asks: Vec<OfferData>,
-}
+pub struct DepthStreamData { pub last_update_id: usize, pub bids: Vec<OfferData>, pub asks: Vec<OfferData>}
 pub fn de_float_from_str<'a, D>(deserializer: D) -> Result<f32, D::Error>
 where
     D: Deserializer<'a>,
@@ -214,14 +205,7 @@ pub mod bookstore_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
-        {
-            BookstoreClient::new(InterceptedService::new(inner, interceptor))
-        }
-        /// Compress requests with `gzip`.
-        ///
-        /// This requires the server to support it otherwise it might respond with an
-        /// error.
+            >>::Error: Into<StdError> + Send + Sync, {BookstoreClient::new(InterceptedService::new(inner, interceptor))}
         #[must_use]
         pub fn send_gzip(mut self) -> Self {
             self.inner = self.inner.send_gzip();
@@ -255,48 +239,32 @@ pub mod bookstore_client {
         }
     }
 }
-/// Generated server implementations.
+
 pub mod bookstore_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    ///Generated trait containing gRPC methods that should be implemented for use with BookstoreServer.
     #[async_trait]
     pub trait Bookstore: Send + Sync + 'static {
-        /// Retrieve a book
         async fn get_book(
             &self,
             request: tonic::Request<super::GetBookRequest>,
         ) -> Result<tonic::Response<super::GetBookResponse>, tonic::Status>;
     }
-    /// The book store service definition.
     #[derive(Debug)]
-    pub struct BookstoreServer<T: Bookstore> {
-        inner: _Inner<T>,
-        accept_compression_encodings: (),
-        send_compression_encodings: (),
-    }
+    pub struct BookstoreServer<T: Bookstore> {inner: _Inner<T>,accept_compression_encodings: (),send_compression_encodings: ()}
     struct _Inner<T>(Arc<T>);
     impl<T: Bookstore> BookstoreServer<T> {
-        pub fn new(inner: T) -> Self {
-            Self::from_arc(Arc::new(inner))
-        }
+        pub fn new(inner: T) -> Self {Self::from_arc(Arc::new(inner))}
         pub fn from_arc(inner: Arc<T>) -> Self {
             let inner = _Inner(inner);
-            Self {
-                inner,
-                accept_compression_encodings: Default::default(),
-                send_compression_encodings: Default::default(),
-            }
+            Self {inner,accept_compression_encodings: Default::default(),send_compression_encodings: Default::default()}
         }
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
         ) -> InterceptedService<Self, F>
         where
-            F: tonic::service::Interceptor,
-        {
-            InterceptedService::new(Self::new(inner), interceptor)
-        }
+            F: tonic::service::Interceptor,{InterceptedService::new(Self::new(inner), interceptor)}
     }
     impl<T, B> tonic::codegen::Service<http::Request<B>> for BookstoreServer<T>
     where
