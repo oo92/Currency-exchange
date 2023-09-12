@@ -1,4 +1,4 @@
-# README: Rust Exchange Simulator
+# Rust Exchange Simulator
 
 ## Introduction:
 
